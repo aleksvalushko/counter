@@ -5,4 +5,9 @@
   margin-top: 1%;
 }
 
+.counterValue {
+  width: 50px;
+  text-align: center;
+}
+
 /*# sourceMappingURL=Counter.module.css.map */

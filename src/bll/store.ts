@@ -14,3 +14,5 @@ export type InferActonType< T extends { [key: string]: (...args: any) => any}> =
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 export default store;
+
+//json-server --watch db.json --port 3004

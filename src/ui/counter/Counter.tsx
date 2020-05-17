@@ -14,6 +14,8 @@ type MapDispatchPropsType = {
     reduceValue: () => void
 }
 
+
+
 const Counter: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
 
     useEffect( () => {
@@ -23,9 +25,10 @@ const Counter: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
     return (
         <div>
             <h1>Counter</h1>
-            <div>Value: <span>{props.value}</span></div>
+            <div>Value:</div>
             <div className={mod.buttons}>
                 <button onClick={props.increaseValue}>+</button>
+                <input type='text' value={props.value} className={mod.counterValue}/>
                 <button onClick={props.reduceValue}>-</button>
             </div>
         </div>
