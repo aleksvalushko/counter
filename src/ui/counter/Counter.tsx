@@ -1,28 +1,42 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 import mod from "./Counter.module.sass"
+import {connect} from "react-redux";
+import {AppState} from "../../bll/store";
+import {getValue, increaseValue, reduceValue} from "../../bll/counterReducer";
 
-const Counter = () => {
+type MapStatePropsType = {
+    value: number
+}
 
-    let [value, setValue] = useState(1);
+type MapDispatchPropsType = {
+    getValue: () => void
+    increaseValue: () => void
+    reduceValue: () => void
+}
 
-    let incrementValue = () => {
-        setValue(value + 1);
-    };
+const Counter: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
 
-    let decrementValue = () => {
-        setValue(value - 1);
-    };
+    useEffect( () => {
+        props.getValue();
+    }, [props]);
 
     return (
         <div>
             <h1>Counter</h1>
-            <div>Value: <span>{value}</span></div>
+            <div>Value: <span>{props.value}</span></div>
             <div className={mod.buttons}>
-                <button onClick={incrementValue}>+</button>
-                <button onClick={decrementValue}>-</button>
+                <button onClick={props.increaseValue}>+</button>
+                <button onClick={props.reduceValue}>-</button>
             </div>
         </div>
     )
-}
+};
 
-export default Counter;
+const mapStateToProps = (state: AppState) => {
+    return {
+        value: state.counter.value
+    }
+};
+
+export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppState>
+(mapStateToProps, {getValue, increaseValue, reduceValue})(Counter);
