@@ -1,0 +1,32 @@
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1%;
+}
+.buttons button {
+  width: 60px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 30px;
+  background: darkorange;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+.buttons button:active {
+  background: red;
+}
+
+.counterValue {
+  width: 100px;
+  text-align: center;
+  margin: 0 5%;
+  font-size: 20px;
+}
+
+.title {
+  font-size: 15px;
+  margin-bottom: 5%;
+}
+
+/*# sourceMappingURL=MinValue.module.css.map */

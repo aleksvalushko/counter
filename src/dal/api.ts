@@ -4,18 +4,31 @@ const instance = axios.create({
     baseURL: 'http://localhost:3004/'
 });
 
-type ValueResponseType = {
-    value: number
+type MinValueResponseType = {
+    minValue: number
+}
+
+type MaxValueResponseType = {
+    maxValue: number
 }
 
 export const counterApi = {
-    getCounterValue() {
-        return instance.get<ValueResponseType>('counter').then(res => res.data.value);
+    getCounterMinValue() {
+        return instance.get<MinValueResponseType>('counter').then(res => res.data.minValue);
     },
-    increaseCounterValue(value: number) {
-        return instance.post<ValueResponseType>('counter', {value}).then(res => res.data.value);
+    increaseCounterMinValue(minValue: number) {
+        return instance.post<MinValueResponseType>('counter', {minValue}).then(res => res.data.minValue);
     },
-    reduceCounterValue(value: number) {
-        return instance.post<ValueResponseType>('counter', {value}).then(res => res.data.value);
+    reduceCounterMinValue(minValue: number) {
+        return instance.post<MinValueResponseType>('counter', {minValue}).then(res => res.data.minValue);
+    },
+    getCounterMaxValue() {
+        return instance.get<MaxValueResponseType>('counter').then(res => res.data.maxValue);
+    },
+    increaseCounterMaxValue(maxValue: number) {
+        return instance.post<MaxValueResponseType>('counter', {maxValue}).then(res => res.data.maxValue);
+    },
+    reduceCounterMaxValue(maxValue: number) {
+        return instance.post<MaxValueResponseType>('counter', {maxValue}).then(res => res.data.maxValue);
     }
 };

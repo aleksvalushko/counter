@@ -6,6 +6,7 @@ const App = () => {
 
     return (
         <div className={mod.App}>
+            <h1>Counter</h1>
             <Counter />
         </div>
     );
