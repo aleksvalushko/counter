@@ -4,31 +4,32 @@ const instance = axios.create({
     baseURL: 'http://localhost:3004/'
 });
 
-type MinValueResponseType = {
-    minValue: number
-}
-
-type MaxValueResponseType = {
+type ValueResponseType = {
     maxValue: number
+    minValue: number
 }
 
 export const counterApi = {
     getCounterMinValue() {
-        return instance.get<MinValueResponseType>('counter').then(res => res.data.minValue);
+        return instance.get<ValueResponseType>('counter').then(res => res.data.minValue);
     },
-    increaseCounterMinValue(minValue: number) {
-        return instance.post<MinValueResponseType>('counter', {minValue}).then(res => res.data.minValue);
+    increaseCounterMinValue(maxValue: number, minValue: number) {
+        return instance.put<ValueResponseType>('counter', {maxValue, minValue})
+            .then(res => res.data.minValue);
     },
-    reduceCounterMinValue(minValue: number) {
-        return instance.post<MinValueResponseType>('counter', {minValue}).then(res => res.data.minValue);
+    reduceCounterMinValue(maxValue: number, minValue: number) {
+        return instance.put<ValueResponseType>('counter', {maxValue, minValue})
+            .then(res => res.data.minValue);
     },
     getCounterMaxValue() {
-        return instance.get<MaxValueResponseType>('counter').then(res => res.data.maxValue);
+        return instance.get<ValueResponseType>('counter').then(res => res.data.maxValue);
     },
-    increaseCounterMaxValue(maxValue: number) {
-        return instance.post<MaxValueResponseType>('counter', {maxValue}).then(res => res.data.maxValue);
+    increaseCounterMaxValue(maxValue: number, minValue: number) {
+        return instance.put<ValueResponseType>('counter', {maxValue, minValue})
+            .then(res => res.data.maxValue);
     },
-    reduceCounterMaxValue(maxValue: number) {
-        return instance.post<MaxValueResponseType>('counter', {maxValue}).then(res => res.data.maxValue);
+    reduceCounterMaxValue(maxValue: number, minValue: number) {
+        return instance.put<ValueResponseType>('counter', {maxValue, minValue})
+            .then(res => res.data.maxValue);
     }
 };

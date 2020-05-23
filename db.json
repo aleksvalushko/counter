@@ -1,5 +1,6 @@
 {
   "counter": {
-    "maxValue": 1
+    "maxValue": 7,
+    "minValue": 8
   }
 }

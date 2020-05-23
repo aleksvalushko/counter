@@ -16,3 +16,6 @@ const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 export default store;
 
 //json-server --watch db.json --port 3004
+   /* "maxValue": 0,*/
+   /* "minValue": 0,*/
+   /* "isDisabled": true*/

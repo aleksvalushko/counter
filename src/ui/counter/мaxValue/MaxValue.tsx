@@ -5,8 +5,8 @@ import {AppState} from "../../../bll/store";
 import {getMaxValue, increaseMaxValue, reduceMaxValue} from "../../../bll/counterReducer";
 
 type MapStatePropsType = {
-    maxValue: number,
-    isDisabled: boolean
+    maxValue: number
+    minValue: number
 }
 
 type MapDispatchPropsType = {
@@ -16,10 +16,9 @@ type MapDispatchPropsType = {
 }
 
 
-
 const MaxValue: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
 
-    useEffect( () => {
+    useEffect(() => {
         props.getMaxValue();
     }, [props]);
 
@@ -29,7 +28,9 @@ const MaxValue: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => 
             <div className={mod.buttons}>
                 <button onClick={props.increaseMaxValue}>+</button>
                 <input type='text' value={props.maxValue} className={mod.counterValue}/>
-                <button onClick={props.reduceMaxValue} disabled={props.isDisabled}>-</button>
+                {props.maxValue > 0
+                    ? <button onClick={props.reduceMaxValue} disabled={false}>-</button>
+                    : <button onClick={props.reduceMaxValue} disabled={true}>-</button>}
             </div>
         </div>
     )
@@ -38,7 +39,7 @@ const MaxValue: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => 
 const mapStateToProps = (state: AppState) => {
     return {
         maxValue: state.counter.maxValue,
-        isDisabled: state.counter.isDisabled
+        minValue: state.counter.minValue
     }
 };
 

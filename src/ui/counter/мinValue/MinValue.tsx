@@ -6,6 +6,7 @@ import {getMinValue, increaseMinValue, reduceMinValue} from "../../../bll/counte
 
 type MapStatePropsType = {
     minValue: number
+    maxValue: number
 }
 
 type MapDispatchPropsType = {
@@ -26,9 +27,13 @@ const MinValue: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => 
         <div className={mod.minValue}>
             <div className={mod.title}>Min value:</div>
             <div className={mod.buttons}>
-                <button onClick={props.increaseMinValue}>+</button>
+                {props.minValue >= props.maxValue
+                    ? <button onClick={props.increaseMinValue} disabled={true}>+</button>
+                    : <button onClick={props.increaseMinValue} disabled={false}>+</button>}
                 <input type='text' value={props.minValue} className={mod.counterValue}/>
-                <button onClick={props.reduceMinValue}>-</button>
+                {props.minValue > 0
+                    ? <button onClick={props.reduceMinValue} disabled={false}>-</button>
+                    : <button onClick={props.reduceMinValue} disabled={true}>-</button>}
             </div>
         </div>
     )
@@ -36,7 +41,8 @@ const MinValue: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => 
 
 const mapStateToProps = (state: AppState) => {
     return {
-        minValue: state.counter.minValue
+        minValue: state.counter.minValue,
+        maxValue: state.counter.maxValue
     }
 };
 

@@ -2,9 +2,8 @@ import {counterApi} from "../dal/api";
 import {AppState, InferActonType} from "./store";
 
 let initState = {
-    maxValue: 0,
     minValue: 0,
-    isDisabled: false
+    maxValue: 0
 };
 
 type InitStateType = typeof initState;
@@ -41,11 +40,6 @@ const counterReducer = (state: InitStateType = initState, action: OwnActionsType
                 ...state,
                 maxValue: action.maxValue
             };
-        case "counter/counterReducer/IS_DISABLE__SUCCESS":
-            return {
-                ...state,
-                isDisabled: action.isDisabled
-            };
         default:
             return state;
     }
@@ -61,11 +55,10 @@ const actions = {
     reduceMinValueSuccess: (minValue: number) => ({type: 'counter/counterReducer/REDUCE_MIN_VALUE_SUCCESS', minValue} as const),
     getMaxValueSuccess: (maxValue: number) => ({type: 'counter/counterReducer/GET_MAX_VALUE_SUCCESS', maxValue} as const),
     increaseMaxValueSuccess: (maxValue: number) => ({type: 'counter/counterReducer/INCREASE_MAX_VALUE_SUCCESS', maxValue} as const),
-    reduceMaxValueSuccess: (maxValue: number) => ({type: 'counter/counterReducer/REDUCE_MAX_VALUE_SUCCESS', maxValue} as const),
-    disableSuccess: (isDisabled: boolean) => ({type: 'counter/counterReducer/IS_DISABLE__SUCCESS', isDisabled} as const)
+    reduceMaxValueSuccess: (maxValue: number) => ({type: 'counter/counterReducer/REDUCE_MAX_VALUE_SUCCESS', maxValue} as const)
 };
 
-//Thunks
+//ThunkCreators
 export const getMinValue = () => async (dispatch: Function) => {
     let response = await counterApi.getCounterMinValue();
     dispatch(actions.getMinValueSuccess(response));
@@ -73,19 +66,19 @@ export const getMinValue = () => async (dispatch: Function) => {
 
 export const increaseMinValue = () => async (dispatch: Function, getState: () => AppState) => {
     let newValue = getState().counter.minValue + 1;
-    let result = await counterApi.increaseCounterMinValue(newValue);
+    let counter = getState().counter;
+    let result = await counterApi.increaseCounterMinValue(counter.maxValue, newValue);
     dispatch(actions.increaseMinValueSuccess(result));
 };
 
 export const reduceMinValue = () => async (dispatch: Function, getState: () => AppState) => {
     let newValue = getState().counter.minValue - 1;
+    let counter = getState().counter;
     if(newValue >= 0){
-        let result = await counterApi.reduceCounterMinValue(newValue);
+        let result = await counterApi.reduceCounterMinValue(counter.maxValue, newValue);
         dispatch(actions.reduceMinValueSuccess(result));
-        dispatch(actions.disableSuccess(false));
     } else {
         dispatch(actions.reduceMinValueSuccess(0));
-        dispatch(actions.disableSuccess(true));
     }
 
 };
@@ -97,19 +90,19 @@ export const getMaxValue = () => async (dispatch: Function) => {
 
 export const increaseMaxValue = () => async (dispatch: Function, getState: () => AppState) => {
     let newValue = getState().counter.maxValue + 1;
-    let result = await counterApi.increaseCounterMaxValue(newValue);
+    let counter = getState().counter;
+    let result = await counterApi.increaseCounterMaxValue(newValue, counter.minValue);
     dispatch(actions.increaseMaxValueSuccess(result));
 };
 
 export const reduceMaxValue = () => async (dispatch: Function, getState: () => AppState) => {
     let newValue = getState().counter.maxValue - 1;
+    let counter = getState().counter;
     if(newValue >= 0){
-        let result = await counterApi.reduceCounterMaxValue(newValue);
+        let result = await counterApi.reduceCounterMaxValue(newValue, counter.minValue);
         dispatch(actions.reduceMaxValueSuccess(result));
-        dispatch(actions.disableSuccess(false));
     } else if(getState().counter.maxValue === 0) {
         dispatch(actions.reduceMaxValueSuccess(0));
-        dispatch(actions.disableSuccess(true));
     }
 };
 
