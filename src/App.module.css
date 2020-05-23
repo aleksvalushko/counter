@@ -9,4 +9,10 @@
   color: white;
 }
 
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /*# sourceMappingURL=App.module.css.map */

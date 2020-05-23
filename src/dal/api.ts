@@ -7,29 +7,33 @@ const instance = axios.create({
 type ValueResponseType = {
     maxValue: number
     minValue: number
+    result: number
 }
 
 export const counterApi = {
     getCounterMinValue() {
         return instance.get<ValueResponseType>('counter').then(res => res.data.minValue);
     },
-    increaseCounterMinValue(maxValue: number, minValue: number) {
-        return instance.put<ValueResponseType>('counter', {maxValue, minValue})
+    increaseCounterMinValue(maxValue: number, minValue: number, result: number) {
+        return instance.put<ValueResponseType>('counter', {maxValue, minValue, result})
             .then(res => res.data.minValue);
     },
-    reduceCounterMinValue(maxValue: number, minValue: number) {
-        return instance.put<ValueResponseType>('counter', {maxValue, minValue})
+    reduceCounterMinValue(maxValue: number, minValue: number, result: number) {
+        return instance.put<ValueResponseType>('counter', {maxValue, minValue, result})
             .then(res => res.data.minValue);
     },
     getCounterMaxValue() {
         return instance.get<ValueResponseType>('counter').then(res => res.data.maxValue);
     },
-    increaseCounterMaxValue(maxValue: number, minValue: number) {
-        return instance.put<ValueResponseType>('counter', {maxValue, minValue})
+    increaseCounterMaxValue(maxValue: number, minValue: number, result: number) {
+        return instance.put<ValueResponseType>('counter', {maxValue, minValue, result})
             .then(res => res.data.maxValue);
     },
-    reduceCounterMaxValue(maxValue: number, minValue: number) {
-        return instance.put<ValueResponseType>('counter', {maxValue, minValue})
+    reduceCounterMaxValue(maxValue: number, minValue: number, result: number) {
+        return instance.put<ValueResponseType>('counter', {maxValue, minValue, result})
             .then(res => res.data.maxValue);
-    }
+    },
+    getCountResult() {
+        return instance.get<ValueResponseType>('counter').then(res => res.data.result);
+    },
 };

@@ -27,7 +27,7 @@ const MinValue: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => 
         <div className={mod.minValue}>
             <div className={mod.title}>Min value:</div>
             <div className={mod.buttons}>
-                {props.minValue >= props.maxValue
+                {props.minValue >= props.maxValue - 1
                     ? <button onClick={props.increaseMinValue} disabled={true}>+</button>
                     : <button onClick={props.increaseMinValue} disabled={false}>+</button>}
                 <input type='text' value={props.minValue} className={mod.counterValue}/>

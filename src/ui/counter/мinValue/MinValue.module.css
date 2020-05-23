@@ -16,6 +16,9 @@
 .buttons button:active {
   background: red;
 }
+.buttons button:hover {
+  color: white;
+}
 
 .counterValue {
   width: 100px;
