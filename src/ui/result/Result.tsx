@@ -6,8 +6,6 @@ import {getResult} from "../../bll/counterReducer";
 
 type MapStatePropsType = {
     result: number
-    maxValue: number
-    minValue: number
 }
 
 type MapDispatchPropsType = {
@@ -24,16 +22,14 @@ const Result: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
 
     return (
         <div className={mod.resultWrapper}>
-            {props.result}
+            {props.result > 10000000000 ? props.result.toPrecision(5) : props.result}
         </div>
     )
 };
 
 const mapStateToProps = (state: AppState) => {
     return {
-        result: state.counter.result,
-        maxValue: state.counter.maxValue,
-        minValue: state.counter.minValue
+        result: state.counter.result
     }
 
 };

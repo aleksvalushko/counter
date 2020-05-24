@@ -15,7 +15,6 @@ type MapDispatchPropsType = {
     reduceMaxValue: () => void
 }
 
-
 const MaxValue: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
 
     useEffect(() => {
@@ -28,7 +27,7 @@ const MaxValue: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => 
             <div className={mod.buttons}>
                 <button onClick={props.increaseMaxValue}>+</button>
                 <input type='text' value={props.maxValue} className={mod.counterValue}/>
-                {props.maxValue <= props.minValue + 1
+                {props.maxValue <= props.minValue
                     ? <button onClick={props.reduceMaxValue} disabled={true}>-</button>
                     : <button onClick={props.reduceMaxValue} disabled={false}>-</button>}
             </div>

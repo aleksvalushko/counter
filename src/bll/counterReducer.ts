@@ -7,15 +7,6 @@ let initState = {
     result: 0
 };
 
-let countResult = (n: number) => {
-    let res = 1;
-    while (n >= 1) {
-        res *= n;
-        n = n - 1;
-    }
-    return res;
-};
-
 type InitStateType = typeof initState;
 
 const counterReducer = (state: InitStateType = initState, action: OwnActionsType) => {
@@ -55,6 +46,11 @@ const counterReducer = (state: InitStateType = initState, action: OwnActionsType
                 ...state,
                 result: action.result
             };
+            case "counter/counterReducer/SET_MAX_VALUE_SUCCESS":
+            return {
+                ...state,
+                maxValue: action.maxValue
+            };
         default:
             return state;
     }
@@ -79,6 +75,10 @@ const actions = {
     } as const),
     getMaxValueSuccess: (maxValue: number) => ({
         type: 'counter/counterReducer/GET_MAX_VALUE_SUCCESS',
+        maxValue
+    } as const),
+    setMaxValueSuccess: (maxValue: number) => ({
+        type: 'counter/counterReducer/SET_MAX_VALUE_SUCCESS',
         maxValue
     } as const),
     increaseMaxValueSuccess: (maxValue: number) => ({
@@ -125,6 +125,14 @@ export const getMaxValue = () => async (dispatch: Function) => {
     dispatch(actions.getMaxValueSuccess(response));
 };
 
+/*export const setMaxValue = (e: any) => async (dispatch: Function, getState: () => AppState) => {
+    let counter = getState().counter,
+        min = counter.minValue,
+        res = counter.result;
+    let response = await counterApi.setCounterMaxValue(e, min, res);
+    dispatch(actions.setMaxValueSuccess(response));
+};*/
+
 export const increaseMaxValue = () => async (dispatch: Function, getState: () => AppState) => {
     let newValue = getState().counter.maxValue + 1;
     let counter = getState().counter;
@@ -142,18 +150,33 @@ export const reduceMaxValue = () => async (dispatch: Function, getState: () => A
         dispatch(actions.reduceMaxValueSuccess(0));
     }
 };
-
 export const getResult = () => async (dispatch: Function) => {
-    let max = await counterApi.getCounterMaxValue(),
-        min = await counterApi.getCounterMinValue(),
-        difference = max - min;
-    if (difference > 1) {
-        let factorial = countResult(difference);
-        dispatch(actions.getCountResultSuccess(factorial));
-    } else {
-        dispatch(actions.getCountResultSuccess(1));
-    }
+    let response = await counterApi.getCountResult();
+    dispatch(actions.getCountResultSuccess(response));
+};
 
+export const setResult = () => async (dispatch: Function, getState: () => AppState) => {
+    let max = getState().counter.maxValue,
+        min = getState().counter.minValue;
+    let countResult = (n: number) => {
+        let res = 1;
+        while (n >= min) {
+            res *= n;
+            n = n - 1;
+        }
+        return res;
+    };
+    let factorial = countResult(max);
+    let result = await counterApi.setCountResult(max, min, factorial);
+    dispatch(actions.getCountResultSuccess(result));
+};
+
+export const resetAllValues = () => async (dispatch: Function, getState: () => AppState) => {
+    let counter = getState().counter,
+        max = counter.maxValue,
+        min = counter.minValue;
+    let newRes = await counterApi.setCountResult(max, min, 0);
+    dispatch(actions.getCountResultSuccess(newRes));
 };
 
 export default counterReducer;

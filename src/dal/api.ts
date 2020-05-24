@@ -36,4 +36,8 @@ export const counterApi = {
     getCountResult() {
         return instance.get<ValueResponseType>('counter').then(res => res.data.result);
     },
+    setCountResult(maxValue: number, minValue: number, result: number) {
+        return instance.put<ValueResponseType>('counter', {maxValue, minValue, result})
+            .then(res => res.data.result);
+    }
 };

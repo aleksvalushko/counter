@@ -1,7 +1,7 @@
 {
   "counter": {
-    "maxValue": 12,
+    "maxValue": 31,
     "minValue": 7,
-    "result": 720
+    "result": 1.1420609241913784e+31
   }
 }
