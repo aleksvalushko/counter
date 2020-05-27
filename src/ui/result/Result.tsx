@@ -12,8 +12,6 @@ type MapDispatchPropsType = {
     getResult: () => void
 }
 
-
-
 const Result: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
 
     useEffect(() => {
@@ -34,4 +32,5 @@ const mapStateToProps = (state: AppState) => {
 
 };
 
-export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppState>(mapStateToProps, {getResult})(Result);
+export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppState>
+(mapStateToProps, {getResult})(Result);

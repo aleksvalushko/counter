@@ -6,18 +6,12 @@ import {connect} from 'react-redux';
 import {AppState} from "../../bll/store";
 import {resetAllValues, setResult} from "../../bll/counterReducer";
 
-type MapStatePropsType = {
-    maxValue: number
-    minValue: number
-    result: number
-}
-
 type MapDispatchPropsType = {
     setResult: () => void
     resetAllValues: () => void
 }
 
-const Counter: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
+const Counter: React.FC<MapDispatchPropsType> = (props) => {
 
     return (
         <div className={mod.counterWrapper}>
@@ -31,13 +25,5 @@ const Counter: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
     )
 };
 
-const mapStateToProps = (state: AppState) => {
-    return {
-        maxValue: state.counter.maxValue,
-        minValue: state.counter.minValue,
-        result: state.counter.result
-    }
-};
-
-export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppState>
-(mapStateToProps, {setResult, resetAllValues})(Counter);
+export default connect<{}, MapDispatchPropsType, {}, AppState>
+(null, {setResult, resetAllValues})(Counter);

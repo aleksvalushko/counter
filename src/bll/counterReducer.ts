@@ -46,11 +46,6 @@ const counterReducer = (state: InitStateType = initState, action: OwnActionsType
                 ...state,
                 result: action.result
             };
-            case "counter/counterReducer/SET_MAX_VALUE_SUCCESS":
-            return {
-                ...state,
-                maxValue: action.maxValue
-            };
         default:
             return state;
     }
@@ -75,10 +70,6 @@ const actions = {
     } as const),
     getMaxValueSuccess: (maxValue: number) => ({
         type: 'counter/counterReducer/GET_MAX_VALUE_SUCCESS',
-        maxValue
-    } as const),
-    setMaxValueSuccess: (maxValue: number) => ({
-        type: 'counter/counterReducer/SET_MAX_VALUE_SUCCESS',
         maxValue
     } as const),
     increaseMaxValueSuccess: (maxValue: number) => ({
@@ -124,14 +115,6 @@ export const getMaxValue = () => async (dispatch: Function) => {
     let response = await counterApi.getCounterMaxValue();
     dispatch(actions.getMaxValueSuccess(response));
 };
-
-/*export const setMaxValue = (e: any) => async (dispatch: Function, getState: () => AppState) => {
-    let counter = getState().counter,
-        min = counter.minValue,
-        res = counter.result;
-    let response = await counterApi.setCounterMaxValue(e, min, res);
-    dispatch(actions.setMaxValueSuccess(response));
-};*/
 
 export const increaseMaxValue = () => async (dispatch: Function, getState: () => AppState) => {
     let newValue = getState().counter.maxValue + 1;

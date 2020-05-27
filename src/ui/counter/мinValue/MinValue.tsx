@@ -15,8 +15,6 @@ type MapDispatchPropsType = {
     reduceMinValue: () => void
 }
 
-
-
 const MinValue: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
 
     useEffect( () => {
