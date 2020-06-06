@@ -13,8 +13,21 @@
     outline: none
     &:active
       background: red
+      outline: none
     &:hover
       color: white
+
+@mixin media730Buttons
+  button
+    width: 40px
+    height: 30px
+    font-size: 20px
+
+@mixin media1000Buttons
+  button
+    width: 80px
+    height: 70px
+    font-size: 40px
 
 @mixin counterValue
   width: 100px
@@ -22,9 +35,15 @@
   margin: 0 5%
   font-size: 20px
 
+@mixin media1000CounterValue
+  font-size: 30px
+
 @mixin title
   font-size: 15px
   margin-bottom: 5%
+
+@mixin media1000Title
+  font-size: 25px
 
 @mixin counterField
   border: 3px solid white
@@ -35,3 +54,15 @@
   align-items: center
   justify-content: center
   color: white
+
+@mixin media730CounterField
+  width: 210px
+  height: 210px
+
+@mixin media1000CounterField
+  width: 400px
+  height: 400px
+
+@mixin media900CounterField
+  width: 350px
+  height: 350px

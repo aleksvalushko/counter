@@ -1,0 +1,33 @@
+.resultWrapper {
+  border: 3px solid white;
+  background: black;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 50px;
+  font-weight: 700;
+}
+
+@media screen and (max-height: 730px) {
+  .resultWrapper {
+    width: 210px;
+    height: 210px;
+  }
+}
+@media screen and (min-width: 900px) {
+  .resultWrapper {
+    width: 350px;
+    height: 350px;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .resultWrapper {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+/*# sourceMappingURL=Result.module.css.map */

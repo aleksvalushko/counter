@@ -4,3 +4,15 @@
   @include counterField
   font-size: 50px
   font-weight: 700
+
+@media screen and (max-height: 730px)
+  .resultWrapper
+    @include media730CounterField
+
+@media screen and (min-width: 900px)
+  .resultWrapper
+    @include media900CounterField
+
+@media screen and (min-width: 1000px)
+  .resultWrapper
+    @include media1000CounterField

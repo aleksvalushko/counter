@@ -32,4 +32,42 @@
   background: royalblue;
 }
 
+@media screen and (max-height: 730px) {
+  .counterWrapper {
+    width: 210px;
+    height: 210px;
+  }
+
+  .buttonsWrapper {
+    margin-top: 5%;
+    width: 190px;
+  }
+  .buttonsWrapper button {
+    width: 60px;
+    height: 35px;
+    font-size: 12px;
+  }
+}
+@media screen and (min-width: 900px) {
+  .counterWrapper {
+    width: 350px;
+    height: 350px;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .counterWrapper {
+    width: 400px;
+    height: 400px;
+  }
+
+  .buttonsWrapper {
+    width: 300px;
+  }
+  .buttonsWrapper button {
+    width: 120px;
+    height: 60px;
+    font-size: 20px;
+  }
+}
+
 /*# sourceMappingURL=Counter.module.css.map */

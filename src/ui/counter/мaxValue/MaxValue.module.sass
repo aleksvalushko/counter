@@ -11,3 +11,15 @@
 
 .title
   @include title
+
+@media screen and (max-height: 730px)
+  .buttons
+    @include media730Buttons
+
+@media screen and (min-width: 1000px)
+  .buttons
+    @include media1000Buttons
+  .title
+    @include media1000Title
+  .counterValue
+    @include media1000CounterValue

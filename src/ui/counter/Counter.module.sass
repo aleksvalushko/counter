@@ -22,3 +22,28 @@
     outline: none
     &:hover
       background: royalblue
+
+@media screen and (max-height: 730px)
+  .counterWrapper
+    @include media730CounterField
+  .buttonsWrapper
+    margin-top: 5%
+    width: 190px
+    button
+      width: 60px
+      height: 35px
+      font-size: 12px
+
+@media screen and (min-width: 900px)
+  .counterWrapper
+    @include media900CounterField
+
+@media screen and (min-width: 1000px)
+  .counterWrapper
+    @include media1000CounterField
+  .buttonsWrapper
+    width: 300px
+    button
+      width: 120px
+      height: 60px
+      font-size: 20px
